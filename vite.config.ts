@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { cjsInterop } from "vite-plugin-cjs-interop";
 import path from "path";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig(() => {
   const isProduction = process.env.NODE_ENV === "production";
@@ -23,26 +24,40 @@ export default defineConfig(() => {
     define: {
       'process.env': {},
       'global': 'globalThis',
-      // Define Buffer globally for browser
-      'Buffer': ['buffer', 'Buffer'],
     },
     resolve: {
       alias: {
-        // Point to the actual buffer package
         buffer: path.resolve(__dirname, 'node_modules/buffer/'),
+        crypto: 'crypto-browserify',
+        stream: 'stream-browserify',
       },
     },
     optimizeDeps: {
-      include: ['buffer'],
+      include: ['buffer', 'crypto-browserify', 'stream-browserify'],
       esbuildOptions: {
         define: {
           global: 'globalThis',
         },
-        // Inject Buffer polyfill at build time
         inject: [path.resolve(__dirname, 'polyfills.js')],
       },
     },
+    build: {
+      rollupOptions: {
+        plugins: [],
+      },
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
+    },
     plugins: [
+      nodePolyfills({
+        include: ['buffer', 'crypto', 'stream', 'util', 'process'],
+        globals: {
+          Buffer: true,
+          global: true,
+          process: true,
+        },
+      }),
       remix({
         ssr: false,
         future: {
