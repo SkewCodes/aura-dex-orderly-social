@@ -1,0 +1,381 @@
+:root {
+  --oui-font-family: 'IBM Plex Sans', sans-serif;
+  --trading-disabled-text: "Trading Disabled";
+
+  /* Aura Brand Colors - Cyan/Blue/Purple Theme */
+  --oui-color-primary: 0 212 255;
+  --oui-color-primary-light: 102 230 255;
+  --oui-color-primary-darken: 0 180 220;
+  --oui-color-primary-contrast: 0 0 0;
+
+  --oui-color-link: 0 212 255;
+  --oui-color-link-light: 102 230 255;
+
+  --oui-color-secondary: 255 255 255;
+  --oui-color-tertiary: 136 141 153;
+  --oui-color-quaternary: 94 99 108;
+
+  --oui-color-danger: 234 57 67;
+  --oui-color-danger-light: 255 102 102;
+  --oui-color-danger-darken: 239 69 74;
+  --oui-color-danger-contrast: 255 255 255;
+
+  --oui-color-success: 22 163 74;
+  --oui-color-success-light: 72 187 120;
+  --oui-color-success-darken: 32 178 108;
+  --oui-color-success-contrast: 255 255 255;
+
+  --oui-color-warning: 255 159 67;
+  --oui-color-warning-light: 255 183 111;
+  --oui-color-warning-darken: 230 130 50;
+  --oui-color-warning-contrast: 255 255 255;
+
+  --oui-color-fill: 10 14 23;
+  --oui-color-fill-active: 20 26 40;
+
+  --oui-color-base-1: 35 42 58;
+  --oui-color-base-2: 28 34 50;
+  --oui-color-base-3: 22 28 42;
+  --oui-color-base-4: 50 60 90;
+  --oui-color-base-5: 16 22 35;
+  --oui-color-base-6: 12 18 28;
+  --oui-color-base-7: 55 65 85;
+  --oui-color-base-8: 8 12 22;
+  --oui-color-base-9: 6 10 18;
+  --oui-color-base-10: 4 6 14;
+
+
+  --oui-color-base-foreground: 255 255 255;
+  --oui-color-line: 60 80 120;
+
+  --oui-color-trading-loss: 251 65 74;
+  --oui-color-trading-loss-contrast: 255 255 255;
+  --oui-color-trading-profit: 29 195 90;
+  --oui-color-trading-profit-contrast: 255 255 255;
+
+  /* Aura Gradients - Cyan to Purple */
+  --oui-gradient-primary-start: 0 180 220;
+  --oui-gradient-primary-end: 123 97 255;
+
+  --oui-gradient-secondary-start: 35 42 58;
+  --oui-gradient-secondary-end: 16 22 35;
+
+  --oui-gradient-success-start: 20 140 60;
+  --oui-gradient-success-end: 22 163 74;
+
+  --oui-gradient-danger-start: 200 50 60;
+  --oui-gradient-danger-end: 234 57 67;
+
+  --oui-gradient-brand-start: 0 212 255;
+  --oui-gradient-brand-end: 123 97 255;
+  --oui-gradient-brand-stop-start: 0%;
+  --oui-gradient-brand-stop-end: 100%;
+  --oui-gradient-brand-angle: 135deg;
+
+  --oui-gradient-warning-start: 230 130 50;
+  --oui-gradient-warning-end: 255 159 67;
+
+  --oui-gradient-neutral-start: 16 22 35;
+  --oui-gradient-neutral-end: 28 34 50;
+
+  /* rounded */
+  --oui-rounded-sm: 2px;
+  --oui-rounded: 4px;
+  --oui-rounded-md: 6px;
+  --oui-rounded-lg: 8px;
+  --oui-rounded-xl: 12px;
+  --oui-rounded-2xl: 16px;
+  --oui-rounded-full: 9999px;
+
+  /* spacing */
+  --oui-spacing-xs: 20rem;
+  --oui-spacing-sm: 22.5rem;
+  --oui-spacing-md: 26.25rem;
+  --oui-spacing-lg: 30rem;
+  --oui-spacing-xl: 33.75rem;
+}
+
+html {
+  font-size: 15.5px;
+}
+
+.oui-font-bold {
+  font-weight: 600;
+}
+
+header>:first-child button {
+  font-weight: 500 !important;
+  color: white;
+
+  span {
+    font-weight: 500 !important;
+    color: white;
+  }
+}
+
+.oui-order-book-list,
+.oui-tabular-nums {
+  font-weight: 500 !important;
+}
+
+.oui-scaffold-footer-powered-by {
+  display: none;
+}
+
+/* These two are for the reward tab text on top right */
+body>div.oui-scaffold-root.oui-font-semibold.oui-text-base-contrast.oui-bg-base-10.oui-flex.oui-flex-col.oui-overflow-auto.oui-custom-scrollbar>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div:nth-child(2)>div:nth-child(1)>div>button>span>span.oui-bg-clip-text.oui-text-inherit.oui-whitespace-nowrap.oui-break-normal,
+body>div.oui-scaffold-root.oui-font-semibold.oui-text-base-contrast.oui-bg-base-10.oui-flex.oui-flex-col.oui-overflow-auto.oui-custom-scrollbar>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div:nth-child(2)>div:nth-child(1)>div>button>span>span.oui-ml-1.group-data-\[open\=true\]\:oui-rotate-180>svg {
+  color: black;
+}
+
+
+/* This is for the reward summary, total commision number*/
+#oui-affiliate-affiliate-summary>div.oui-box.oui-px-6.oui-py-4.oui-rounded-xl.oui-gradient-primary.oui-size-width.oui-size-height.oui-flex.oui-flex-col.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-gap-3.oui-max-h-\[104px\] {
+  color: black
+}
+
+/* This is for the reward summary, total commision text*/
+#oui-affiliate-affiliate-summary>div.oui-box.oui-px-6.oui-py-4.oui-rounded-xl.oui-gradient-primary.oui-size-width.oui-size-height.oui-flex.oui-flex-col.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-gap-3.oui-max-h-\[104px\]>span {
+  color: #404144;
+}
+
+/* Also apply to the link container to prevent squishing */
+body>div.oui-scaffold-root.oui-font-semibold.oui-bg-base-10.oui-text-base-contrast.oui-flex.oui-flex-col.oui-custom-scrollbar.oui-overflow-auto>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div.oui-box.oui-flex.oui-flex-row.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-gap-3.oui-overflow-hidden>a {
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+/* Hides top right rewards button when screen width is shrinked to a certain threshold so it doesn't block the tabs*/
+@media (max-width: 980px) {
+  body>div.oui-scaffold-root.oui-font-semibold.oui-text-base-contrast.oui-bg-base-10.oui-flex.oui-flex-col.oui-overflow-auto.oui-custom-scrollbar>div.oui-box.oui-scaffold-topNavbar.oui-bg-base-9>header>div:nth-child(2)>div:nth-child(1) {
+    display: none;
+  }
+}
+
+#changeLocaleButtonDiv {
+  background: linear-gradient(135deg, rgb(0, 212, 255), rgb(123, 97, 255));
+  border-radius: 12px;
+  /* or 8px, 16px, etc. */
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2);
+  padding: 4px 16px;
+  /* wider padding for a rectangle look */
+  font-weight: 500;
+  font-size: 12px;
+  transition: background 0.2s;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  min-width: 70px;
+  /* a bit wider for rectangle */
+  text-align: center;
+  user-select: none;
+  color: white;
+  display: block;
+  white-space: nowrap;
+}
+
+/* Make changeLocaleButton smaller on mobile */
+@media (max-width: 768px) {
+  #changeLocaleButtonDiv {
+    padding: 4px 8px;
+    min-width: 50px;
+    font-size: 11px;
+  }
+}
+
+input[value="Aura"] {
+  pointer-events: none !important;
+  user-select: none !important;
+  cursor: not-allowed !important;
+}
+
+img[alt*="WOOFi"],
+img[alt*="woofi"],
+img[src*="woofi"],
+svg[class*="woofi"] {
+  display: none !important;
+}
+
+/* Hide affiliate and rebate summary on mobile for portfolio page */
+@media (max-width: 768px) {
+  body>div.oui-box.oui-size-width.oui-size-height.oui-flex.oui-flex-col.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-h-full-screen.oui-bg-base-10>div>div.oui-box.oui-size-width.oui-size-height.oui-flex.oui-flex-col.oui-items-center.oui-justify-start.oui-flex-nowrap.oui-gap-5.oui-px-3>div:nth-child(3) {
+    display: none !important;
+  }
+}
+
+/* Primary and Secondary Logo Link Styling */
+#primary-logo-link,
+#secondary-logo-link {
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  /* Change from flex-start to center */
+  text-decoration: none !important;
+  line-height: 0 !important;
+}
+
+#primary-logo-link img,
+#secondary-logo-link img {
+  height: 30px !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: unset !important;
+  /* Remove any min-width constraints */
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+header>* {
+  zoom: 0.85;
+}
+
+/* Bottom Navigation Styling */
+footer.oui-scaffold-bottomNav {
+  background: rgba(8, 10, 16, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-top: 1px solid rgba(44, 48, 58, 0.8) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Bottom nav main container */
+footer>div {
+  padding: 8px 16px 12px 16px !important;
+  gap: 4px !important;
+}
+
+/* Bottom nav clickable items */
+footer>div>div {
+  padding: 12px 16px !important;
+  border-radius: 20px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+/* Hide icons (first span) but keep text */
+footer>div>div>span:first-child {
+  display: none !important;
+}
+
+/* Style the text labels */
+footer>div>div>span:last-child {
+  margin-top: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: inherit !important;
+  line-height: 1.3 !important;
+  color: inherit !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Simple hover effect for all items */
+footer>div>div:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  footer>div {
+    padding: 8px 12px 14px 12px !important;
+  }
+
+  footer>div>div {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+    border-radius: 18px !important;
+  }
+}
+
+/* URL-based active states using :has() selector */
+body:has([href*="/perp"]) footer>div>div:nth-child(1),
+body:has([href*="/trading"]) footer>div>div:nth-child(1) {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: rgb(0, 212, 255) !important;
+}
+
+body:has([href*="/portfolio"]) footer>div>div:nth-child(2) {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: rgb(0, 212, 255) !important;
+}
+
+body:has([href*="/markets"]) footer>div>div:nth-child(3) {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: rgb(0, 212, 255) !important;
+}
+
+body:has([href*="/leaderboard"]) footer>div>div:nth-child(4) {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: rgb(0, 212, 255) !important;
+}
+
+/* Remove the data-route selectors and replace with JavaScript-based solution */
+
+/* Default state for all bottom nav items */
+footer>div>div {
+  padding: 12px 16px !important;
+  border-radius: 20px !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+/* Active state class that JavaScript will add */
+footer>div>div.nav-active {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: rgb(0, 212, 255) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2) !important;
+}
+
+/* Active indicator */
+footer>div>div.nav-active::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -3px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 24px !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, rgb(0, 212, 255), rgb(123, 97, 255)) !important;
+  border-radius: 0 0 3px 3px !important;
+}
+
+/* Add message to deposit dialog - English (default) */
+#oui-deposit-form>div:first-child::after {
+  content: "※ Aura is a decentralized exchange and does not custody user assets in a centralized manner. All user funds are stored securely in a vault smart contract.";
+  display: block;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Korean version - when data-lang="ko" */
+html[data-lang="ko"] #oui-deposit-form>div:first-child::after {
+  content: "※ Aura is a decentralized exchange and does not custody user assets. All user funds are stored securely in a vault smart contract.";
+}
+
+.oui-bg-base-4.oui-text-primary-contrast,
+.oui-bg-success-darken.oui-text-primary-contrast,
+.oui-bg-danger-darken.oui-text-primary-contrast {
+  color: white;
+}
+
+[id*="-trigger-accountId"] {
+  display: none !important;
+}

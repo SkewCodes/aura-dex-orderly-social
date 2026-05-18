@@ -1,0 +1,10 @@
+@import "@orderly.network/ui/dist/styles.css";
+@import "../styles/theme.css";
+@import "../styles/fonts.css";
+@import "./drinkcode.css";
+@import "./global.css";
+@import "../styles/aura.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
