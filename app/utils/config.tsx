@@ -44,6 +44,7 @@ const ALL_MENU_ITEMS: MainNavItem[] = [
   { name: "Trading", href: "/", translationKey: "common.trading" },
   { name: "Portfolio", href: "/portfolio", translationKey: "common.portfolio" },
   { name: "Markets", href: "/markets", translationKey: "common.markets" },
+  { name: "Predict", href: "/predict" },
   { name: "Social", href: "/social", translationKey: "extend.social" },
   { name: "Leaderboard", href: "/leaderboard", translationKey: "tradingLeaderboard.leaderboard" },
   { name: "Rewards", href: "/rewards", translationKey: "extend.rewards" },
@@ -54,6 +55,7 @@ const DEFAULT_ENABLED_MENUS: MainNavItem[] = [
   { name: "Trading", href: "/", translationKey: "common.trading" },
   { name: "Portfolio", href: "/portfolio", translationKey: "common.portfolio" },
   { name: "Markets", href: "/markets", translationKey: "common.markets" },
+  { name: "Predict", href: "/predict" },
   { name: "Social", href: "/social", translationKey: "extend.social" },
   { name: "Leaderboard", href: "/leaderboard", translationKey: "tradingLeaderboard.leaderboard" },
   { name: "Rewards", href: "/rewards", translationKey: "extend.rewards" },
@@ -175,7 +177,7 @@ export const useOrderlyConfig = () => {
     const customMenus = getCustomMenuItems();
 
     const translatedEnabledMenus = enabledMenus.map(menu => ({
-      name: t(menu.translationKey!),
+      name: menu.translationKey ? t(menu.translationKey) : menu.name,
       href: menu.href,
       target: menu.target,
       icon: isMobile && typeof menu.icon === 'string' ? (
