@@ -17,6 +17,9 @@ export default defineConfig(() => {
   }
 
   return {
+    server: {
+      hmr: { overlay: false },
+    },
     ssr: {
       noExternal,
       external: ["@privy-io/cross-app-connect/rainbow-kit"],

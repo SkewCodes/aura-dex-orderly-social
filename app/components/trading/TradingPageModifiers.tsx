@@ -1,6 +1,7 @@
 import { FeeSectionModifier } from './FeeSectionModifier';
 import { OrderHistoryHeaderModifier } from './OrderHistoryHeaderModifier';
 import { ToastSoundModifier } from './ToastSoundModifier';
+import { PredictTabModifier } from './PredictTabModifier';
 
 /**
  * Wrapper component that applies all trading page modifications and effects
@@ -11,6 +12,7 @@ export function TradingPageModifiers() {
         <>
             <FeeSectionModifier />
             <OrderHistoryHeaderModifier />
+            <PredictTabModifier />
             {/* <ToastSoundModifier /> */}
         </>
     );

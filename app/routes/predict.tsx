@@ -4,7 +4,7 @@ import { Scaffold } from "@orderly.network/ui-scaffold";
 import { useOrderlyConfig } from "@/utils/config";
 import { useNav } from "@/hooks/useNav";
 
-export default function PredictPage() {
+export default function PredictLayout() {
   const config = useOrderlyConfig();
   const { onRouteChange } = useNav();
 
@@ -19,9 +19,7 @@ export default function PredictPage() {
         initialMenu: "/predict",
       }}
       footerProps={config.scaffold.footerProps}
-      routerAdapter={{
-        onRouteChange,
-      }}
+      routerAdapter={{ onRouteChange }}
     >
       <Outlet />
     </Scaffold>

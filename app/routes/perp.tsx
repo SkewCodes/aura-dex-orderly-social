@@ -3,7 +3,7 @@ import { Scaffold } from "@orderly.network/ui-scaffold";
 import { useOrderlyConfig } from "@/utils/config";
 import { useNav } from "@/hooks/useNav";
 
-export default function PerpPage() {
+export default function PerpLayout() {
   const config = useOrderlyConfig();
   const { onRouteChange } = useNav();
 

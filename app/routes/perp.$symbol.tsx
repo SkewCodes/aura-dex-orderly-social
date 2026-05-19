@@ -1,29 +1,75 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "@remix-run/react";
 import { API } from "@orderly.network/types";
 import { TradingPage } from "@orderly.network/trading";
 import { updateSymbol } from "@/utils/storage";
 import { useOrderlyConfig } from "@/utils/config";
 import {
-  useMarkets, useMarketsStore,
-  MarketsStorageKey,
+  useMarkets,
   MarketsType,
   useMarkPrice
 } from "@orderly.network/hooks";
 import { useTranslation } from "@orderly.network/i18n";
 import { TradingPageModifiers } from '@/components/trading/TradingPageModifiers';
 
+const PREDICT_PREFIX = "PREDICT_";
+
+function isPredictSymbol(symbol: string): boolean {
+  return symbol.startsWith(PREDICT_PREFIX);
+}
+
+function extractMarketId(symbol: string): string {
+  return symbol.slice(PREDICT_PREFIX.length);
+}
+
+function LazyPredictView({ marketId }: { marketId: string }) {
+  const [Component, setComponent] = useState<React.ComponentType<{ marketId: string }> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    import("@/components/predict/PredictTradingView")
+      .then((m) => setComponent(() => m.PredictTradingView))
+      .catch((err) => setError(err?.message ?? "Failed to load"));
+  }, []);
+
+  useEffect(() => {
+    document.title = "Predict | Aura";
+  }, []);
+
+  if (error) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "calc(100vh - 48px - 29px)", color: "rgba(255,255,255,0.54)", fontSize: 14, gap: 8 }}>
+        <div style={{ color: "#F5618B" }}>Error loading prediction market</div>
+        <div style={{ fontSize: 12, color: "rgba(255,255,255,0.36)" }}>{error}</div>
+      </div>
+    );
+  }
+
+  if (!Component) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "calc(100vh - 48px - 29px)", color: "rgba(255,255,255,0.36)", fontSize: 14 }}>
+        Loading prediction market...
+      </div>
+    );
+  }
+
+  return <Component marketId={marketId} />;
+}
 
 export default function PerpPage() {
   const params = useParams();
-  const [symbol, setSymbol] = useState(params.symbol!);
+  const initialSymbol = params.symbol!;
+  const [symbol, setSymbol] = useState(initialSymbol);
   const config = useOrderlyConfig();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { data: price } = useMarkPrice(symbol);
   const { i18n } = useTranslation();
 
-  const [markets, { favorites, updateFavorites }] = useMarkets(MarketsType.FAVORITES);
+  const isPredict = isPredictSymbol(symbol);
+
+  const { data: price } = useMarkPrice(isPredict ? "PERP_BTC_USDC" : symbol);
+
+  const [, { favorites, updateFavorites }] = useMarkets(MarketsType.FAVORITES);
   useEffect(() => {
     const btcSymbol = "PERP_BTC_USDC";
     const defaultTab = { name: "Popular", id: 1 };
@@ -35,31 +81,18 @@ export default function PerpPage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    let t: number | undefined;
-
-
     try {
-      // For desktop orderbook - set to quote (USDC)
       localStorage.setItem("orderbook_coin_type", '"USDC"');
-      // For mobile orderbook - set to "quote"
       localStorage.setItem("orderbook_mobile_coin_unit", '"quote"');
-
-      // localStorage.getItem("orderbook_coin_type")
-      // localStorage.getItem("orderbook_mobile_coin_unit")
-    } catch (e) {
-    }
-
-    return () => {
-      if (t) clearTimeout(t);
-    };
-  }, [location.pathname]);
-
+    } catch {}
+  }, []);
 
   useEffect(() => {
-    updateSymbol(symbol);
-  }, [symbol]);
+    if (!isPredict) updateSymbol(symbol);
+  }, [symbol, isPredict]);
 
   useEffect(() => {
+    if (isPredict) return;
     if (price && typeof price === 'number') {
       const formattedSymbol = symbol.split("_")[1];
       const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -67,24 +100,32 @@ export default function PerpPage() {
         maximumFractionDigits: 20,
         maximumSignificantDigits: 5,
       }).format(price);
-
-      const platformName = 'Aura';
-      document.title = `${formattedPrice} ${formattedSymbol} | ${platformName}`;
+      document.title = `${formattedPrice} ${formattedSymbol} | Aura`;
     }
-  }, [price, symbol, i18n.language]);
+  }, [price, symbol, i18n.language, isPredict]);
+
+  useEffect(() => {
+    setSymbol(initialSymbol);
+  }, [initialSymbol]);
 
   const onSymbolChange = useCallback(
     (data: API.Symbol) => {
-      const symbol = data.symbol;
-      setSymbol(symbol);
-
-      const searchParamsString = searchParams.toString();
-      const queryString = searchParamsString ? `?${searchParamsString}` : '';
-
-      navigate(`/perp/${symbol}${queryString}`);
+      const sym = data.symbol;
+      setSymbol(sym);
+      const qs = searchParams.toString();
+      navigate(`/perp/${sym}${qs ? `?${qs}` : ''}`);
     },
     [navigate, searchParams]
   );
+
+  if (isPredict) {
+    return (
+      <>
+        <LazyPredictView marketId={extractMarketId(symbol)} />
+        <TradingPageModifiers />
+      </>
+    );
+  }
 
   return (
     <>
